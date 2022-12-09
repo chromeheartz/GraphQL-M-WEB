@@ -116,5 +116,53 @@
   allTweets도 query에 추가하기만하면 data.allTweets로 넘어올것이다
   우리가 한것은 단순한 graphQL 쿼리이다.
   하나의 쿼리에 원하는 만큼 쿼리들을 추가할 수 있음.
-  
+
+*/
+
+/*
+  #1.3 useQuery Variables
+
+  Movies와 Movie 스크린을 연결할것이다
+  :id를 parameter로 Link에 넘겨주어 라우터를 구현해볼것이다.
+
+  Movie에서 parameter를 받아오기 위해 useParams를 사용
+  그리고 쿼리를 써볼것인데 이 쿼리가 하나의 movie만을 받아올것이라면
+  id를 변수로 보내주어야한다.
+
+  어떻게하면 쿼리를 변수로 보낼수 있을까.
+  대부분의 경우 쿼리와 변수를 함께 보내야 할것이다
+
+  GET_MOVIE라는 것을 만들어 변수를 보낼 수 잇께 query를 작성해주었다
+  실제로 요청을 백엔드 server에 movie라고 불리는 resolver에 넘겨주어야할것이다
+
+  Movie.js에 있는 컴포넌트가 GET_MOVIE쿼리를 위해 movie id라고 하는 변수를 제공하도록 만든것이다
+  리액트 컴포넌트가 GET_MOVIE 쿼리를 얻기 위해 변수를 제공하면
+  GraphQL즉, Apollo가 String인 movie id를 넣을것이다.
+
+  기존에 우리가 graphql studio에서 했던것과 똑같다
+  query랑 String변수의 이름을 쓰고 graphQL API를 호출했다.
+
+  const {} = useQuery(GET_MOVIE, {
+    variables: {
+      movieId : params.id
+    }
+  })
+  이것이 변수를 필요로하는 쿼리로 변수를 보내는 방법이다.
+  매개변수의 이름이 같아야한다.
+
+  loading일때도 구현해주면 잘 나오는것을 확인 해볼 수 있다
+
+  *** Apollo cache 
+
+  Apollo cache의 힘은 loading을 더이상 보지 않게 되는것이다
+  뒤로갔다가 다시 돌아올때에 로딩이 보이지 않을것이다 이유는
+  우리가 처음에 설정했던 in memory cache 설정이 바로 지금 발생한것이다.
+  Apollo가 내 쿼리들을 저장할것이다
+  브라우저에 있는 메모리에 cache에.
+
+  즉 한번 화면을 가져오면 다른 화면으로 이동했다가 돌아왔을때 데이터를 가져오지 않아도 되는것이다
+
+  ** 쿼리에 변수보내기
+  쿼리를 작성하고 API에 필요한 변수를 올바른 type으로 추가한 다음 해당 변수를 보내주면 된다.
+
 */
