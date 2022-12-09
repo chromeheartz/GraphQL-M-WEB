@@ -6,6 +6,7 @@ const GET_MOVIE = gql`
     movie(id: $movieId) {
       id
       title
+      small_cover_image
     }
   }
 `;

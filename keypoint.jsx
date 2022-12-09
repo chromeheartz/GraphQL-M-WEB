@@ -166,3 +166,29 @@
   쿼리를 작성하고 API에 필요한 변수를 올바른 type으로 추가한 다음 해당 변수를 보내주면 된다.
 
 */
+
+/*
+  1.4 Apollo Dev Tools
+
+  Apollo Dev Tools는 cache를 확인할 수 있게 해준다
+  확장을 하고나면 inspector에 Apollo라는 것이 생기게 될것이다
+  클릭해보면 이전에 실행했었던 쿼리들을 볼 수 있다. 
+  Explorer를 열어보면 굳이 서버쪽으로 보지 않아도 확인 될 수 있게 되어있다.
+
+  cache에는 Apollo가 나의 Movies에 대한 정보들을 다 가지고있다.
+  
+  Movies화면에서 allMovies에 요청할것은 title과 id뿐이다.
+  하지만 Movie에서 small_cover_image를 요청하면 어떻게될까
+  Apollo는 Movie가 무엇인지 안다 'type Movie'를 알기 때문에
+
+  요청후 cache를 확인해보면 cache안에 클릭했던 영화에
+  small_cover_image가 들어와있는것을 볼 수 있을것이다.
+
+  같은 type, 같은 id 객체의 추가적인 데이터를 요청한다면
+  Apollo는 그 새로운 데이터를 같은 cache안에 넣을것이다.
+
+  이것들은 entity(개체)다. Apollo client는 그 id로 Movie라는 개체를 생성
+
+  **** 나중에 사용자가 데이터를 수정하기 원하는 경우에는
+  같은 entity 안에서 전부 수정할 수 있는것이다.
+*/
