@@ -83,3 +83,38 @@
   useQuery를 사용해서 개선해볼것이다. useQuery는 쿼리의 내부적으로 client.query를 실행한다
   그리고 데이터를 state안에 넣어줄것이다.
 */
+
+/*
+  #1.2 useQuery
+
+  현재 했던 방식은 신경쓸게 많아서 대신 GraphQL 쿼리를 쓸것이다
+  export 바깥쪽(컴포넌트 외부)에 const로 선언해주고 gql을 쓸것이다
+  gql은 우리가 썼던 함수.
+  
+  이 안에 썼던것은 항상 우리가 playground에서 썼던것과 같다
+  query allMovies, query getMovies처럼 이름을 붙일 수 있는데
+  굳이 같은 필요는 없다
+
+  useQuery를 해주고 안에 아까 내가 만들었던 ALL_MOVIES를 넣어주었다.
+  useQuery는 엄청 좋은 hook이다.
+  우리한테 많은것들을 결과로 넘겨주는데 
+  data, client, loading, error 등등이 있다. 이 정보들을 useQuery를 호출하게 되면 다 얻을것
+
+  * GraphQL요청에서 data를 얻고 loading을 하든 안하든 알림을 받고
+  네트워크 상태도 받을 수 있고 전에 만든 client에 엑세스 할수 있어서
+  useApolloClient를 더이상 쓰지 않아도 된다
+
+  이 hook이 멋진 이유는 우리가 declarative code(선언형 코드)를 쓰게 해주기 때문이다
+  선언형 코드는 원하는걸 설명하기 위한 코드만 적는것을 말한다.
+
+  반면에 imperative(명령형)은 모든 단계의 코드를 적는것이다
+  기존에 했던 방식들이 명령형. 첫번째로 쿼리요청을 보내고 두번째로 state에 저장하고 step by step으로 진행하는것
+
+  data안에 받을것은 우리가 요청했던 정보를 가진 객체다
+  allMovies를 요청했으니 그 안에 들어올것이다
+
+  allTweets도 query에 추가하기만하면 data.allTweets로 넘어올것이다
+  우리가 한것은 단순한 graphQL 쿼리이다.
+  하나의 쿼리에 원하는 만큼 쿼리들을 추가할 수 있음.
+  
+*/
