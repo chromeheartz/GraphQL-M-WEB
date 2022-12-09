@@ -192,3 +192,56 @@
   **** 나중에 사용자가 데이터를 수정하기 원하는 경우에는
   같은 entity 안에서 전부 수정할 수 있는것이다.
 */
+
+/*
+  #2.0 Styles / #2.1 Local Only Fields
+
+  Apollo client로 local state를 다루어볼것이다
+  또한, local state를 API에서 제공되는 remote data와 병합하기 위해 어떻게 쓰는지도.
+
+  그 전에 styled-component를 이용해서 어느정도 디자인적으로 보일수 있게 꾸며주었다.
+
+  * 2.1
+
+  내가 하고싶은것은 사용자가 영화에 좋아요를 누를 수 있게 하는것이다
+  무언가 버튼이 있어서 그 버튼을 누르면 좋아하는 영화로 보이게 하는것이다.
+  문제는 백엔드에는 그런 resolver나 mutation , account등이 없어서
+  likeMovieMutation 같은것을 만들 수는 없을것이다
+
+  대신 브라우저안에서 모든것을 처리해볼것
+  Apollo cache를 이용해서.
+
+  * local only field *
+  local only field는 remote filed의 반대이다.
+  id
+  title
+  medium_cover_image
+  rating
+
+  이런것들이 remote filed 이다. Apollo는 페이지가 로딩되면 이것들을 
+  cache에서 먼저 찾을것이다.
+  그곳에서 찾지 못하면 Apollo는 API에 이 field들을 요청할것이고, 
+  그럼 GraphQL은 응답하게 된다.
+
+  local only field는 절대 API로 가지 않는 field이다.
+  Apollo는 절대 local only field를 API에서 찾지 않을것
+  cache에서만 활동하는 field이다.
+
+  선언하거나 요청하는 방법은 아주 간단하다
+  cache옆에만 있다고 알려주기위해
+  isLiked @client 라고 선언해줄것이다
+
+  이 isLiked 데이터를 요청하는 방식은 movie의 다른 field를 요청하는 방식과 동일하다
+  button을 하나 만들어 사용자가 Like를 했으면 UnLike를 보여줄것이고
+  Like를 안했으면 Like Movie를 보여줄것이다
+
+  <button>{data?.movie?.isLiked? "UnLike" : "Like"}</button>
+  아주 쉽게 isLiked data에 접근할 수 있다 기존에 remote data에 접근하는 방법이랑 같다
+
+  * GraphQL의 병합의 힘이다 *
+  예를들어 GraphQL API에서 가져온 객체를 cache에 저장할 수 있을것이다
+  그럼 cache에 사용자 프로필을 가지게 될것이다
+
+  그리고 local only field로 다크모드라던지 타임존, 볼륨크기 등등을 local only field에 저장할 수 있게 될것이다
+  
+*/
