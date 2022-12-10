@@ -245,3 +245,39 @@
   그리고 local only field로 다크모드라던지 타임존, 볼륨크기 등등을 local only field에 저장할 수 있게 될것이다
   
 */
+
+/*
+  #2.2 writeFragment
+
+  이벤트 핸들러를 만들었는데 여기서 우리는 cache에 접근해 수정해야한다
+  cache는 client에 있고 아직 client에 접근하지 않아도 된다.
+
+  두가지 옵션이 있는데
+  하나는 client를 쓰고 useApolloClient를 가져오는것 
+  다른 한가지는 useQuery에서 client를 가져오는것이다
+  이번에는 useQuery에서 cache를 가져올것
+
+  그리고 onClick안에 cache.writeFragment를 썼다
+  이것은 타입의 일부다. 타입 movie는 타입이고 타입 movie의 fragment를 만들 수 있다
+
+  우선 우리의 cache에서 수정하고싶은 객체를 알아내야한다.
+  dev tools에서 보게되면 Movie에 객체의 id가 들어간것을 알 수 있다
+  그 단어는 API에서 나온 type Movie이고 뒤에것은 id이다. 
+  이것으로 우리가 수정하고자하는 영화를 알아낼 수 있다 **
+
+  ** cache안에 수정하고싶은 객체를 알아내는 것이 핵심
+  useParams로 가져오는 id를 writeFragment에 넘겨줌
+
+  cache.writeFragment({
+    id: `Movie:${params.id}`,
+    fragment: gql`
+      fragment MovieFragment on Movie
+    `
+  })
+
+  onClick안에 이런식으로 구현했는데 gql다음에 나오는 fragment는 예약어라고 생각하면된다
+  필수라 바꾸지 못한다. 그 다음은 원하는 원하는 fragment이름을 해주면되고
+  on도 필수이고 Movie는 GraphQL API에서 온 타입이라 바꾸지 못한다
+  여기들어가는 타입은 id에 보내주는 Movie와 이름이 같아야한다.
+
+*/
