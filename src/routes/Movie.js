@@ -64,8 +64,15 @@ export default function Movie() {
     cache.writeFragment({
       id: `Movie:${params.id}`,
       fragment: gql`
-        fragment MovieFragment on Movie
-      `
+        fragment MovieFragment on Movie {
+          isLiked
+        }
+      `,
+      data : {
+        // title : "hello",
+        isLiked : !data.movie.isLiked,
+        // rating: 10
+      }
     })
   }
   return (

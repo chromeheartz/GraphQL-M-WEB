@@ -280,4 +280,24 @@
   on도 필수이고 Movie는 GraphQL API에서 온 타입이라 바꾸지 못한다
   여기들어가는 타입은 id에 보내주는 Movie와 이름이 같아야한다.
 
+  이 fragment 안에서 우리가 수정하고싶은 한 부분을 말해주면된다.
+  하나의 큰 타입의 일부이기 때문에 Movie의 한 부분만 수정하고싶다
+  isLiked부분만
+  현재 한것은 writeFragment인데 어떤 type의 일부를 cache에 작성할 것이다
+  즉, 우리는 id를 가진 Movie를 찾고 fragment들을 객체(Movie) 안에 쓸것이다
+
+  Apollo cache를 성공적으로 수행한것이다. 
+  cache의 data가 잘 바뀜.
+  우리가 cache 의 안으로 가서 cache를 수정했다 Apollo client는 isLiked의 변경사항을 듣는 모든것들을 새로고침 할것
+
+  영화 제목같은것도 바꾸어버릴수 있다
+
+  * data만 써놓으면 바뀌지않는다
+  우리가 무엇을 바꿀지 정의를 하는게 중요 (fragment안에 )
+  타입에서 어떤 field를 수정할지 Apollo에게 말하기
+
+  이제 true에서 다시 false로 가게 fragment를 수정해볼것이다
+  data.movie.isLiked를 가져와서 반대값이 되도록 ! 를 추가한다
+
+  좋은점은 다른 화면으로 돌아가도 누른것이 유지가 된다는점
 */
