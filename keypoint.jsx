@@ -301,3 +301,21 @@
 
   좋은점은 다른 화면으로 돌아가도 누른것이 유지가 된다는점
 */
+
+/*
+  #2.3 Conclusions
+
+  데이터를 얻기 위해 우리가 해야할것은
+  const { data, loading, client : { cache } } = useQuery(GET_MOVIE, {
+    variables: {
+      movieId: params.id,
+    },
+  });
+
+  이것밖에 없는것이다 client : cache를 사용하지 않는다면 한줄이 될것이다
+
+  아무것도 안해도 한줄만 있으면 컴포넌트에 데이터를 넣을 수 있다.
+  loading, data, error state가 있다
+
+  
+*/
